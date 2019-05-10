@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="card card-cascade mt-4 mx-3 mb-5">
+
+  <!--Card image-->
+  <div class="default-color d-flex justify-content-between align-items-center">
+    <div>
+        <a href="{{url_for('index', option='active')}}" class="btn btn-outline-white btn-sm px-2">Active</a>
+        <a href="{{url_for('index', option='inactive')}}" class="btn btn-outline-white btn-sm px-2">Inactive</a>
+    </div>
+
+    <h4 class="white-text text-uppercase text-center font-weight-normal py-3 mb-0">Student Management System</h4>
+    
+    <a href="{{url_for('add_student')}}" class="btn btn-outline-white btn-md">Add New</a>
+  </div>
+  <!--/Card image-->
+
+  <div class="p-0">
+
+    <div class="table-wrapper">
+      <!--Table-->
+      <table class="table table-responsive-lg table-hover mb-0 w-auto">
+
+        <!--Table head-->
+        <thead class="green lighten-5">
+          <tr>
+            <th style="width: 30px!important">#</th>
+            <th>Student ID</th>
+            <th>First Name EN</th>
+            <th>Last Name EN</th>            
+            <th>First Name KH</th>
+            <th>Last Name KH</th>
+            <th>Gender</th>
+            <th>Date Of Birth</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+          {% if student %}
+            {%- for std in student|sort(attribute='student_id') %}
+            <tr>
+              <th scope="row" style="width: 30px!important">{{ loop.index }}</th>
+              <td>{{std.student_id}}</td>
+              <td>{{std.first_name_en}}</td>
+              <td>{{std.last_name_en}}</td>
+              <td>{{std.first_name_kh}}</td>
+              <td>{{std.last_name_kh}}</td>
+              <td>{{std.gender}}</td>
+              <td>{{std.date_of_birth}}</td>
+              <td>{{std.phone}}</td>
+              <td>{{std.email}}</td>
+              <td>{{std.address}}</td>
+              <td>
+                {% if view == 'active' %}
+                  <a href="{{url_for('update_student', student_id=std.student_id)}}" class="btn-primary btn-sm mr-1" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                  <a class="btn-danger btn-sm" href="{{ url_for('delete_student', student_id=std.student_id) }}" title="Delete"><i class="fa fa-times"></i></a>
+                {% elif view == 'inactive' %}
+                  <a class="btn-success btn-sm" href="{{ url_for('undo_delete_student', student_id=std.student_id) }}" title="Undo Delete"><i class="fa fa-undo"></i></a>
+                {% endif %}
+              </td>
+            </tr>
+            {%- endfor %}
+          {% endif %}
+        </tbody>
+        <!--Table body-->
+      </table>
+      <!--Table-->
+    </div>
+    <div class="text-center">
+      <a href="{{url_for('add_student')}}" class="btn btn-default mb-4">Add New Student</a>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}

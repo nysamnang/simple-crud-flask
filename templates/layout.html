@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>SMS</title>
+  <link rel="shortcut icon" href="/static/img/favicon.png" />
+
+  <!-- Font Awesome -->
+  <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="/static/css/compiled.min.css" rel="stylesheet">
+  <!-- Your custom styles -->
+  <link href="/static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="/static/js/compiled.min.js"></script>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <script>
+          var messages = {{ messages | safe }}
+          toastr[`{{ category }}`](messages)
+        </script>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <!-- Start your project here-->
+  <div class="container-fluid mt-5">
+    <!--Navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark default-color scrolling-navbar">
+
+      <!-- Navbar brand -->
+      <a class="navbar-brand text-uppercase font-weight-normal" href="/">
+        <img src="/static/img/brand_logo.png" height="40" class="ml-2" alt="Brand Logo">
+      </a>
+      
+      {% if current_user.username %}
+      <!-- Collapse button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Collapsible content -->
+
+      <div class="collapse navbar-collapse" id="basicExampleNav">
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light">
+              <i class="fa fa-user"></i> Hello: {{ current_user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="{{ url_for('logout') }}">
+              <i class="fa fa-sign-out"></i> Logout</a>
+          </li>
+        </ul>
+        <!-- Links -->
+      </div>
+      {% endif %}
+      <!-- Collapsible content -->
+    </nav>
+    <!--/.Navbar-->
+
+    <div style="height: 1px"></div>
+
+    {% block content %} {% endblock %}
+
+  <!-- /Start your project here-->
+
+</body>
+</html>

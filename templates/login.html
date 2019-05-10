@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-5 mx-auto">
+
+      <section class="form-gradient">
+        <!--Form with header-->
+        <div class="card">
+          <form accept-charset="UTF-8" role="form" action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            <!--Header-->
+            <div class="header py-3 default-color">
+              <div class="row d-flex justify-content-center">
+                <h3 class="white-text mb-3 pt-3 font-weight-bold"><i class="fa fa-lock mr-3"></i>Log in</h3>
+              </div>
+            </div>
+            <!--Header-->
+
+            <div class="card-body mx-4 mt-4">
+              <!--Body-->
+
+              <div class="md-form">
+                <i class="fa fa-user prefix grey-text"></i>
+                {{ form.username(
+                  type="text", id="form1", class="form-control", autocomplete="off"
+                )}}
+                {% for error in form.username.errors %}
+                <span class="red-text">{{ error }}</span> {% endfor %}
+                <label for="form1" class="">Username</label>
+              </div>
+
+              <div class="md-form pb-1 pb-md-3">
+                <i class="fa fa-lock prefix grey-text"></i>
+                {{ form.password(type="password", id="form2", class="form-control") }}
+                {% for error in form.password.errors %}
+                <span class="red-text">{{ error }}</span> {% endfor %}
+                <label for="form2" class="">Password</label>
+              </div>
+
+              <!--Grid row-->
+              <div class="row d-flex align-items-center mb-4">
+                <!--Grid column-->
+                <div class="col-md-1 col-md-5 d-flex align-items-start">
+                  <div class="text-center">
+                    {{ form.submit(class="btn btn-default z-depth-1a waves-effect waves-light") }}
+                  </div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-7">
+                  <p class="font-small grey-text d-flex justify-content-end mt-3">Don't have an account? <a href="{{ url_for('register')}}" class="teal-text text-uppercase ml-1 font-weight-bold"> Register</a></p>
+                </div>
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+            </div>
+          </form>
+        </div>
+        <!--/Form with header-->
+      </section>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
