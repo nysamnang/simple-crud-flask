@@ -66,3 +66,7 @@ body{
 table{
   table-layout: fixed
 }
+
+table .theader th {
+  color: #333333;
+}

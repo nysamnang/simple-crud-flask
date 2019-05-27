@@ -23,7 +23,7 @@
       <table class="table table-responsive-lg table-hover mb-0 w-auto">
 
         <!--Table head-->
-        <thead class="green lighten-5">
+        <thead class="green lighten-5 theader">
           <tr>
             <th style="width: 30px!important">#</th>
             <th>Student ID</th>
@@ -31,7 +31,7 @@
             <th>Last Name EN</th>            
             <th>First Name KH</th>
             <th>Last Name KH</th>
-            <th>Gender</th>
+            <th style="width: 80px!important">Gender</th>
             <th>Date Of Birth</th>
             <th>Phone</th>
             <th>Email</th>
@@ -46,7 +46,7 @@
           {% if student %}
             {%- for std in student|sort(attribute='student_id') %}
             <tr>
-              <th scope="row" style="width: 30px!important">{{ loop.index }}</th>
+              <th>{{ loop.index }}</th>
               <td>{{std.student_id}}</td>
               <td>{{std.first_name_en}}</td>
               <td>{{std.last_name_en}}</td>
