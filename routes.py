@@ -66,8 +66,7 @@ def add_student():
     if len(student) == 0:
         next_index =1
     else:
-        last_index = len(student) - 1
-        next_index = student[last_index].id + 1
+        next_index = len(student) + 1
     
     if form.validate_on_submit():
         student = Student(
